@@ -12,7 +12,7 @@
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/rps.png");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai.png");
             background-color: #cccccc;
             height: 100vh;
             background-position: center;
@@ -30,13 +30,22 @@
             color: white;
         }
     </style>
+    <script type="text/javascript">
+        document.getElementById("myButton").onclick = function () {
+            location.href = "index.html";
+        };
+    </script>
 </head>
 
 <body>
     <div class="hero-image">
         <div class="hero-text">
-            <h2 style="color:white;font-size:40px;">Prediction: {{ category }}</h2>
+            <h2 style="color:white;font-size:20px;">Prediction: {{ category }}</h2>
             <img src="static/images/output.png" alt="Input Image" width="250" height="250">
+            <br>
+            <a href="javascript:history.back()">New Analysis</a>
+
+
         </div>
     </div>
 </body>

@@ -31,6 +31,11 @@ class RetinaModel:
     def read_image(self, image):
         return mpimg.imread(image)
 
+    def get_model_name(self):
+        return self.model_name
+    
+    def get_model_description(self):
+        return self.model_description
 
     def format_image(self, image):
         # img = tf.image.resize(image[tf.newaxis, ...], [self.image_size, self.image_size]) / 255.0
@@ -51,8 +56,11 @@ class RetinaModel:
             format_img = self.format_image(input_img)
             self.interpreter.set_tensor(self.input_index, format_img)
             self.interpreter.invoke()
-            retVal = self.class_names[np.argmax(self.interpreter.get_tensor(self.output_index))]
+            preds = self.interpreter.get_tensor(self.output_index)
+            pred_index = np.argmax(preds)
+            prediction_score = preds[pred_index]
+            retVal = self.class_names[pred_index]
         except Exception as e: 
              self.logger.error("RetinaModel predict exception {}".format(str(e)))
-        self.logger.info('RetinaAI image class type = {}'.format(retVal))
+        self.logger.info('RetinaAI image class type = {}, prediction_score ={}, predictions ={}'.format(retVal, prediction_score, np.array_str(preds,precision = 4)))
         return retVal

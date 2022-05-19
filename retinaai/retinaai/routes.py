@@ -1,8 +1,12 @@
 
 from .prediction import get_category, plot_category
-from flask import request, render_template
+from flask import Flask, request, render_template, flash, request,redirect, url_for
 from flask import current_app as app
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/', methods=['GET', 'POST'])
 def retina_ai():
@@ -17,9 +21,16 @@ def retina_ai():
             return
         # Read file from upload
         file = request.files['file']
-        # Get category of prediction
-        category = get_category(img=file)
-        # Plot the category
-        plot_category(file)
-        # Render the result template
-        return render_template('result.html', category=category)
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            # Get category of prediction
+            category = get_category(img=file)
+            # Plot the category
+            plot_category(file)
+            # Render the result template
+            return render_template('result.html', category=category)
+        return redirect(request.url)

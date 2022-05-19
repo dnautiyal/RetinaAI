@@ -11,7 +11,8 @@
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/rps.png");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai.png");
+            /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("retinaai.png"); */
             background-color: #cccccc;
             height: 100vh;
             background-position: center;
@@ -30,32 +31,46 @@
         }
 
         input[type=file] {
-            width: 100%;
+            /* width: 100%; */
             padding: 12px 20px;
             margin: 8px 0;
             display: block;
-            width: 200px;
+            width: 250px;
             color: white;
             justify-content: center;
             align-items: center;
             text-align: center;
+            margin-left: auto;
+            margin-right: auto;            
             box-sizing: border-box;
-            border-style: solid white;
+            border-style: solid rgb(255, 255, 255);            
             border-width: 2px;
             border-radius: 2px;
+        }
+        input[type=file]::file-selector-button {
+            border: 1px solid #010008;
+            padding: .2em .4em;
+            border-radius: .2em;
+            width: 100px;
+            height: 27px;
+            background-color: #fbfafc;
+            transition: 1s;
         }
 
         input[type=submit] {
             width: 100%;
-            padding: 12px 20px;
+            padding: 12px 10px;
             margin: 8px 0;
             display: block;
-            width: 200px;
+            width: 130px;
+            height: 55px;
             font-size: 1.5em;
             color: white;
             justify-content: center;
             align-items: center;
             text-align: center;
+            margin-left: auto;
+            margin-right: auto;
             box-sizing: border-box;
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             background-color: #DC143C;
@@ -68,10 +83,13 @@
 
     <div class="hero-image">
         <div class="hero-text">
-            <h1 style="font-size:50px">RetinaAI Classifier</h1>
-            <h3>Upload a picture of RETINA OCT Image! </h3>
+            <h1 style="font-size:50px">Retinal OCT Image Diagnostics</h1>
+            <h3>Upload Retinal OCT Image! </h3>
             <form method='post' enctype=multipart/form-data> <input type="file" name="file">
-                <input type="submit" value="upload">
+                <input type="submit" value="Upload">
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
