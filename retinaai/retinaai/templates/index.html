@@ -11,8 +11,8 @@
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai.png");
-            /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("retinaai.png"); */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai_1.png");
+            /* background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("retinaai_1.png"); */
             background-color: #cccccc;
             height: 100vh;
             background-position: center;
@@ -35,7 +35,7 @@
             padding: 12px 20px;
             margin: 8px 0;
             display: block;
-            width: 250px;
+            width: 300px;
             color: white;
             justify-content: center;
             align-items: center;
@@ -56,15 +56,18 @@
             background-color: #fbfafc;
             transition: 1s;
         }
+        input[type=file]::file-selector-button:hover {
+            background: #F8A64B
+        }
 
-        input[type=submit] {
+        input[type=submit] {            
             width: 100%;
             padding: 12px 10px;
             margin: 8px 0;
             display: block;
-            width: 130px;
-            height: 55px;
-            font-size: 1.5em;
+            width: 110px;
+            height: 45px;
+            font-size: 1.0em;
             color: white;
             justify-content: center;
             align-items: center;
@@ -73,9 +76,41 @@
             margin-right: auto;
             box-sizing: border-box;
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            background-color: #DC143C;
+            background-color: #E07000;
             border-radius: 4px;
+            transition: 1s;
         }
+        input[type=submit]:hover {
+            background: #C35B06
+        }
+        input[type=submit]:focus {
+            outline: 1px solid rgb(24, 1, 1);
+            outline-offset: -4px;
+        }
+        .bottomright {
+            position: fixed;
+            right: 0px; bottom: 0px;
+            width: 372px;
+            height:262px;
+            /* background-color:lightblue; */
+            padding: 5px;
+        }
+        .topleft{
+            position: fixed;
+            left: 0px; top: 0px;
+            width: 372px;
+            height:262px;
+            /* background-color:lightblue; */
+            padding: 5px;
+        }
+        .large {
+            width: 2000px; height: 500px;
+            background-color: lightgray;
+        }
+        .fb-logo{
+            width : 372px;
+            height: auto;
+        }  
     </style>
 </head>
 
@@ -83,11 +118,20 @@
 
     <div class="hero-image">
         <div class="hero-text">
-            <h1 style="font-size:50px">Retinal OCT Image Diagnostics</h1>
-            <h3>Upload Retinal OCT Image! </h3>
-            <form method='post' enctype=multipart/form-data> <input type="file" name="file">
+            <img src="/static/images/banner_orange.png" alt="OCT Image Diagnostics">
+            <!-- <img src="banner_orange.png" alt="OCT Image Diagnostics"> -->
+            <br></br>
+            <br></br>          
+            <!-- <h4>Upload Retinal OCT Image! </h4> -->
+            
+            <form method='post' enctype=multipart/form-data>
+                Upload retinal OCT image for analysis!
+                <input type="file" name="file">
                 <input type="submit" value="Upload">
             </form>
+        </div>
+        <div class="bottomright">
+            <img src="/static/images/Fourthbrain-removebg-preview.png" alt="FourthBrain:  MLE-6/Capstone Project">            
         </div>
     </div>
 </body>

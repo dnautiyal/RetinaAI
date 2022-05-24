@@ -1,5 +1,5 @@
 
-from .prediction import get_category, plot_category
+from .prediction import get_prediction, create_output_image
 from flask import Flask, request, render_template, flash, request,redirect, url_for
 from flask import current_app as app
 
@@ -28,9 +28,9 @@ def retina_ai():
             return redirect(request.url)
         if file and allowed_file(file.filename):
             # Get category of prediction
-            category = get_category(img=file)
+            category_data = get_prediction(file)
             # Plot the category
-            plot_category(file)
+            create_output_image(file)
             # Render the result template
-            return render_template('result.html', category=category)
+            return render_template('result.html', category=category_data, file_name = file.filename)
         return redirect(request.url)

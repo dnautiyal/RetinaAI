@@ -12,7 +12,7 @@
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai.png");
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("/static/images/retinaai_1.png");
             background-color: #cccccc;
             height: 100vh;
             background-position: center;
@@ -29,6 +29,33 @@
             transform: translate(-50%, -50%);
             color: white;
         }
+        .pred-table {
+            margin: 0 auto; /* or margin: 0 auto 0 auto */
+        }
+        .bottomright {
+            position: fixed;
+            right: 0px; bottom: 0px;
+            width: 372px;
+            height:262px;
+            /* background-color:lightblue; */
+            padding: 5px;
+        }
+        .topleft{
+            position: fixed;
+            left: 0px; top: 0px;
+            width: 372px;
+            height:262px;
+            /* background-color:lightblue; */
+            padding: 5px;
+        }
+        .large {
+            width: 2000px; height: 500px;
+            background-color: lightgray;
+        }
+        .fb-logo{
+            width : 372px;
+            height: auto;
+        }  
     </style>
     <script type="text/javascript">
         document.getElementById("myButton").onclick = function () {
@@ -40,12 +67,20 @@
 <body>
     <div class="hero-image">
         <div class="hero-text">
-            <h2 style="color:white;font-size:20px;">Prediction: {{ category }}</h2>
+            <img src="/static/images/banner_orange.png" alt="OCT Image Diagnostics">
+            <br>
+            <br>
+            <h3 style="color:white;"><u>Predictions for OCT Image ({{ file_name|safe }})</u></h3>
+            {{ category|safe }}                          
+            <br>
             <img src="static/images/output.png" alt="Input Image" width="250" height="250">
             <br>
-            <a href="javascript:history.back()">New Analysis</a>
-
-
+            <br>
+            <br>
+            <a style="color:rgb(173, 8, 8);font-size:20px;" href="javascript:history.back()">New Analysis</a>
+        </div>
+        <div class="bottomright">
+            <img src="/static/images/Fourthbrain-removebg-preview.png" alt="FourthBrain:  MLE-6/Capstone Project">            
         </div>
     </div>
 </body>

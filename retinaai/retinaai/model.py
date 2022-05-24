@@ -1,7 +1,7 @@
 import tensorflow as tf
 from tensorflow.python import keras
 from tensorflow.python.keras import layers
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 import matplotlib.image as mpimg
 import numpy as np
 import os
@@ -28,39 +28,34 @@ class RetinaModel:
         self.output_index = self.interpreter.get_output_details()[0]["index"]
         self.logger.info("END ==> RetinaModel created with model_name = {}".format(model_name))
     
-    def read_image(self, image):
-        return mpimg.imread(image)
-
     def get_model_name(self):
         return self.model_name
     
     def get_model_description(self):
         return self.model_description
-
-    def format_image(self, image):
-        # img = tf.image.resize(image[tf.newaxis, ...], [self.image_size, self.image_size]) / 255.0
-        self.logger.info("format_image ==> original image shape is = {}".format(tf.shape(image)))
-        img = np.stack((image,)*3, axis=-1)
-        img = img / 255.0
-        self.logger.info("format_image ==> image shape is = {}".format(tf.shape(img)))
-        img1 = tf.image.resize(img, (self.image_size,self.image_size))
-        new_img = np.expand_dims(img1, axis=0).astype(np.float32)
-        self.logger.info("format_image ==> new_img shape is = {}".format(tf.shape(new_img)))
-        return new_img
-
-    # Sample Method 
-    def  predict(self, img):
+    
+    # method to predict from 'img' object which is the object received from webpage's multipart upload
+    def  predict(self, input_image_filename, formatted_img):
         self.logger.info("BEGIN ==> RetinaModel.predict created with model_name = {}".format(self.model_name))
+        ret_val = {}
         try:
-            input_img = self.read_image(img)
-            format_img = self.format_image(input_img)
-            self.interpreter.set_tensor(self.input_index, format_img)
+            ret_val['Model'] = self.get_model_description()
+            self.interpreter.set_tensor(self.input_index, formatted_img)
             self.interpreter.invoke()
             preds = self.interpreter.get_tensor(self.output_index)
             pred_index = np.argmax(preds)
-            prediction_score = preds[pred_index]
-            retVal = self.class_names[pred_index]
+            prediction_score = preds[0][pred_index]
+            class_name = self.class_names[pred_index]
+            ret_val['Prediction-Class'] = class_name
+            ret_val['Prediction-Score'] = "{:.2%}".format(prediction_score)
         except Exception as e: 
-             self.logger.error("RetinaModel predict exception {}".format(str(e)))
-        self.logger.info('RetinaAI image class type = {}, prediction_score ={}, predictions ={}'.format(retVal, prediction_score, np.array_str(preds,precision = 4)))
-        return retVal
+            self.logger.error("RetinaModel predict exception {}".format(str(e)))
+            class_name = "ERROR"
+            prediction_score = 0
+            ret_val['Prediction-Class'] = class_name
+            ret_val['Prediction-Score'] = "{:.2%}".format(prediction_score)
+            return ret_val            
+        self.logger.info('RetinaAI Image ({}) class type = {}, prediction_score ={}, predictions ={}'.format(input_image_filename, class_name, prediction_score, np.array_str(preds,precision = 4)))
+        return ret_val
+
+    
