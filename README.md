@@ -1,2 +1,2 @@
 # RetinaAI
-Retina OCT Image Analaysis using Computer Vision
+Retina OCT Image Analysis using Computer Vision
