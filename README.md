@@ -6,3 +6,15 @@ Retinal OCT image analysis for eye disease diagnosis: The OCT (Optical Coherence
 This project is designed to aid in the detection of retinal diseases (CNV, DME, DRUSEN) and help direct patients to the proper treatment as soon as possible. Using supervised and self-supervised deep learning techniques we wish to  build state-of-the-art Retinal OCT diseases diagnostic system.
 
 ![Retinal OCT Images](RetinaAI-Disease-Images.png)
+
+## Model Performance
+![Model Performance](RetinaAI-Model-Performance.png)
+
+## AI Explainability
+
+### Vanilla Saliency
+![RetinaAI-Vanilla-Saliency](RetinaAI-Vanilla-Saliency.png)
+
+### LIME Interpretation
+![Interpretation LIME](RetinaAI-Interpretation-LIME.png)
+
